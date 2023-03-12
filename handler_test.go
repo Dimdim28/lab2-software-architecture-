@@ -36,7 +36,7 @@ func (s *MySuite) TestComputeHandlerError(c *C) {
 	b := bytes.NewBuffer(make([]byte, 0))
 
 	handler := ComputeHandler{
-		Input:  strings.NewReader("aboba"),
+		Input:  strings.NewReader("14 88"),
 		Output: b,
 	}
 	err := handler.Compute()

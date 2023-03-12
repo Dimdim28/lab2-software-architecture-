@@ -46,3 +46,23 @@ func PrefixToInfix(input string) (string, error) {
 
 	return res, nil
 }
+
+func Pop(str []string) (string, []string) {
+	if len(str) == 0 {
+	  return "", []string{}
+	}
+
+	return str[len(str)-1], str[:len(str)-1]
+  }
+
+  func Join(expression1 string, expression2 string, symbol string) (string){
+	if strings.Contains(expression1, " ") && strings.Contains("*/^", symbol) {
+	  expression1 = "(" + expression1 + ")"
+	}
+	if strings.Contains(expression2, " ") && strings.Contains("*/^", symbol) {
+	  expression2 = "(" + expression2 + ")"
+	}
+
+	var newExpression = expression1 + " " + symbol + " " + expression2
+	return newExpression
+  }

@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func (s *TestSuite) TestComputeHandler(c *C) {
+func (s *MySuite) TestComputeHandler(c *C) {
 	b := bytes.NewBuffer(make([]byte, 0))
 
 	handler := ComputeHandler{
@@ -19,7 +19,7 @@ func (s *TestSuite) TestComputeHandler(c *C) {
 	c.Assert(b.String(), Equals, "6 - 2")
 }
 
-func (s *TestSuite) TestComputeHandlerHard(c *C) {
+func (s *MySuite) TestComputeHandlerHard(c *C) {
 	b := bytes.NewBuffer(make([]byte, 0))
 
 	handler := ComputeHandler{
@@ -32,7 +32,7 @@ func (s *TestSuite) TestComputeHandlerHard(c *C) {
 	c.Assert(b.String(), Equals, "5 / ((9 + 8) * 3)")
 }
 
-func (s *TestSuite) TestComputeHandlerError(c *C) {
+func (s *MySuite) TestComputeHandlerError(c *C) {
 	b := bytes.NewBuffer(make([]byte, 0))
 
 	handler := ComputeHandler{

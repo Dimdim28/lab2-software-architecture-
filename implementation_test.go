@@ -2,22 +2,40 @@ package lab2
 
 import (
 	"fmt"
+	. "gopkg.in/check.v1"
 	"testing"
-
-	"github.com/stretchr/testify/assert"
 )
 
-func TestPrefixToPostfix(t *testing.T) {
-	res, err := PrefixToPostfix("+ 5 * - 4 2 3")
-	if assert.Nil(t, err) {
-		assert.Equal(t, "4 2 - 3 * 5 +", res)
-	}
+func Test(t *testing.T) {
+	TestingT(t)
 }
 
-func ExamplePrefixToPostfix() {
-	res, _ := PrefixToPostfix("+ 2 2")
-	fmt.Println(res)
+type MySuite struct{}
+
+var _ = Suite(&MySuite{})
+
+func (s *MySuite) TestPrefixToInfix(c *C) {
+	result, err := PrefixToInfix("+ 2 2")
+	c.Assert(result, Equals, "2 + 2")
+
+	result, err = PrefixToInfix("/ 5 * + 9 8 3")
+	c.Assert(result, Equals, "5 / ((9 + 8) * 3)")
+
+	result, err = PrefixToInfix("+ 1 * 3 / - 4 / 6 2 - 9 7")
+	c.Assert(result, Equals, "1 + 3 * ((4 - 6 / 2) / (9 - 7))")
+
+	result, err = PrefixToInfix(" +++ 12 +++")
+	c.Assert(err, ErrorMatches, "invalid input expression")
+}
+
+func ExamplePrefixToInfix() {
+	res, err := PrefixToInfix("+ 2 2")
+	if err == nil {
+		fmt.Println(res)
+	} else {
+		panic(err)
+	}
 
 	// Output:
-	// 2 2 +
+	// 2 + 2
 }

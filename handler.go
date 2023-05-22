@@ -1,7 +1,6 @@
 package lab2
 
 import (
-	"bytes"
 	"io"
 	"strings"
 )
@@ -14,12 +13,10 @@ type ComputeHandler struct {
 }
 
 func (ch *ComputeHandler) Compute() error {
-	bufRead := make([]byte, 128)
-	_, err := ch.Input.Read(bufRead)
+	bufRead, err := io.ReadAll(ch.Input)
 	if err != nil {
 		return err
 	}
-	bufRead = bytes.Trim(bufRead, "\x00")
 
 	expression := string(bufRead)
 	trimmed := strings.Trim(expression, " \n")
